@@ -1,0 +1,15 @@
+package com.unciadroolsnotin.model
+import com.unciadroolsnotin.model.Person;
+global com.unciadroolsnotin.model.Person person;
+global com.unciadroolsnotin.model.Response response;
+import java.util.List;
+global List<String> excludedNames;
+
+dialect "mvel"
+rule "PersonNotInList"
+when
+    $person: Person(name not memberOf excludedNames)
+then
+    // Rule consequence for persons not in the list
+    System.out.println("Person not in the list: " + $person.getName());
+end
